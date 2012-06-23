@@ -1,0 +1,24 @@
+﻿<Window x:Class="MonteCarloPi.View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="View" Height="300" Width="300">
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Number of Points" />
+            <TextBox Text="{Binding NumberOfPoints}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Calculated value of Pi" />
+            <TextBox Text="{Binding CalculatedPi}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Known value of Pi" />
+            <TextBox Text="{Binding Pi, Mode=OneWay}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Deviation" />
+            <TextBox Text="{Binding Deviation}" />
+        </StackPanel>
+        <Button Width="100" Content="Go"  Command="{Binding GoCommand}" />
+    </StackPanel>
+</Window>
