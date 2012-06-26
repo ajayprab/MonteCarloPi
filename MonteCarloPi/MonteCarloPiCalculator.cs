@@ -19,7 +19,7 @@ namespace MonteCarloPi
 
         public double GetValueOfPi(int numberOfPoints)
         {
-            int numberOfPointsInCircle = 0;
+            var numberOfPointsInCircle = 0;
             double tempx, tempy;
             for (int i = 0; i < numberOfPoints; i++)
             {
