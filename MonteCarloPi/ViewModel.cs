@@ -43,7 +43,17 @@ namespace MonteCarloPi
             get { return Math.PI; }
         }
 
-        private List<Point> points;
+        private IEnumerable<Point> points;
+
+        public IEnumerable<Point> Points
+        {
+            get { return points; }
+            private set
+            {
+                points = value;
+                RaisePropertyChanged("Points");
+            }
+        }
 
         public DelegateCommand GoCommand { get; set; }
      
@@ -64,17 +74,19 @@ namespace MonteCarloPi
 
         private void CalculatePi()
         {
-            CalculatedPi = piCalculator.GetValueOfPi(NumberOfPoints);
+            var result = piCalculator.GetValueOfPi(NumberOfPoints);
+            Points = result.Item2;
+            CalculatedPi = piCalculator.GetValueOfPi(NumberOfPoints).Item1;
             Deviation = Pi - CalculatedPi;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    class Point
+    public class Point
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 
 }

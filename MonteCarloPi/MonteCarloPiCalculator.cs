@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace MonteCarloPi
 {
 
-    public interface IMonteCarloPiCalculator
+     interface IMonteCarloPiCalculator
     {
-        double GetValueOfPi(int numberOfPoints);
+        Tuple<double,IEnumerable<Point>> GetValueOfPi(int numberOfPoints);
     }
 
     public class MonteCarloPiCalculator : IMonteCarloPiCalculator
@@ -17,9 +18,10 @@ namespace MonteCarloPi
             this.randomNumberGenerator = randomNumberGenerator;
         }
 
-        public double GetValueOfPi(int numberOfPoints)
+        public Tuple<double, IEnumerable<Point>> GetValueOfPi(int numberOfPoints)
         {
             var numberOfPointsInCircle = 0;
+            List<Point> points = new List<Point>();
             double tempx, tempy;
             for (int i = 0; i < numberOfPoints; i++)
             {
@@ -27,11 +29,12 @@ namespace MonteCarloPi
                 tempy = randomNumberGenerator.GetNext();
                 if (Math.Pow(tempx, 2) + Math.Pow(tempy, 2) <= 1)
                 {
+                    points.Add(new Point { X = tempx*100, Y = tempy*100 });
                     numberOfPointsInCircle++;
                 }
             }
 
-            return ((double) numberOfPointsInCircle/numberOfPoints)*4;
+            return Tuple.Create<double,IEnumerable<Point>>(((double) numberOfPointsInCircle/numberOfPoints)*4, points);
         }
     }
 }
